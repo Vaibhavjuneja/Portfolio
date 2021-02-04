@@ -187,5 +187,19 @@
     loop: true,
     items: 1
   });
+$('#contact-form').submit(function(e) {
+    e.preventDefault();
+      $(".loading").show();
+      $.ajax({
+          url: "https://formspree.io/f/xgepqlvw",
+          method: "POST",
+          data: { message: $('form').serialize() },
+          dataType: "json"
+      }).done(function(response) {
+          $('.sent-message').show();
+          $('#contact-form').find("input[type=text], input[type=email], textarea").val("");
+      });
+  });
+
 
 })(jQuery);
